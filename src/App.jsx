@@ -54,7 +54,7 @@ class App extends Component {
               </h1>
               <div className="justify-evenly w-full pt-4 px-4 flex">
                 <div className="relative">
-                  <SearchBox  />
+                  <SearchBox onSearchChange={onSearchChange} />
                 </div>
               </div>
             </div>

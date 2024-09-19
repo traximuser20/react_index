@@ -11,14 +11,15 @@ class CardList extends Component {
   };
 
   render() {
+    const { filteredMonsters } = this.props;
     return (
       <div>
-        {this.props.filteredMonsters.length === 0 ? (
+        {filteredMonsters.length === 0 ? (
           <p className="text-2xl animate-pulse text-yellow-600 font-bold px-2 py-4">
             Loading...
           </p> // Renders when the array is empty
         ) : (
-          this.props.filteredMonsters.map((val) => {
+          filteredMonsters.map((val) => {
             return (
               <div key={val.id} className="flex items-center gap-3 my-4">
                 <div className="bg-yellow-600 w-3 h-3 rounded-full"></div>
