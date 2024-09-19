@@ -1,6 +1,9 @@
 import { Component } from "react";
 import axios from "axios";
 
+import SearchBox from "./components/searchBox";
+import CardList from "./components/cardList";
+
 class App extends Component {
   constructor() {
     super();
@@ -51,32 +54,7 @@ class App extends Component {
               </h1>
               <div className="justify-evenly w-full pt-4 px-4 flex">
                 <div className="relative">
-                  <input
-                    onChange={onSearchChange}
-                    type="search"
-                    placeholder="Search..."
-                    className="search-box w-full p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                  />
-                  <div className="bg-gray-400 h-full w-0.5 absolute top-0 left-9"></div>
-                  <button
-                    type="submit"
-                    className="hover:shadow-2xl transition-transform hover:scale-110 duration-300 absolute left-3 top-3 text-gray-500 hover:text-gray-800 focus:outline-none"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 absolute top-0.5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35"
-                      />
-                    </svg>
-                  </button>
+                  <SearchBox  />
                 </div>
               </div>
             </div>
@@ -85,20 +63,7 @@ class App extends Component {
             <div className="text-center text-3xl font-bold text-white">
               Monsters Rolodex
             </div>
-            {filteredMonsters.length === 0 ? (
-              <p className="text-2xl animate-pulse text-yellow-600 font-bold px-2 py-4">
-                Loading...
-              </p> // Renders when the array is empty
-            ) : (
-              filteredMonsters.map((val) => {
-                return (
-                  <div key={val.id} className="flex items-center gap-3 my-4">
-                    <div className="bg-yellow-600 w-3 h-3 rounded-full"></div>
-                    <div className="text-yellow-600 text-lg">{val.name}</div>
-                  </div>
-                );
-              })
-            )}
+            <CardList filteredMonsters={filteredMonsters} />
           </div>
         </div>
       </>
