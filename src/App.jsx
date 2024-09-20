@@ -1,6 +1,6 @@
 import { Component } from "react";
 import axios from "axios";
-
+import './App.css'
 import SearchBox from "./components/searchBox";
 import CardList from "./components/cardList";
 
@@ -46,20 +46,18 @@ class App extends Component {
     );
     return (
       <>
-        <div className="max-w-[30%] mx-auto my-8">
-          <div className="bg-purple-800 rounded-lg p-3 w-full">
-            <div className="bg-white/20 backdrop-blur-2xl shadow-2xl border border-white/10 p-8">
+        <div className="mx-auto my-8">
+          <div className="p-3 w-full">
               <h1 className="text-3xl font-bold text-white text-center">
                 Search a monster
               </h1>
               <div className="justify-evenly w-full pt-4 px-4 flex">
                 <div className="relative">
-                  <SearchBox onSearchChange={onSearchChange} />
+                  <SearchBox onSearchChange={onSearchChange} className={"monster-search-box"} placeholder={"Search..."}/>
                 </div>
               </div>
-            </div>
           </div>
-          <div className="bg-teal-600 px-6 py-4 rounded-lg hover:shadow-2xl transition-transform duration-300 hover:scale-110">
+          <div className="px-6 py-4 rounded-lg mt-8">
             <div className="text-center text-3xl font-bold text-white">
               Monsters Rolodex
             </div>

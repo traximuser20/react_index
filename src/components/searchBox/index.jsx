@@ -1,9 +1,12 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import "./searchBox.css"
 
 class SearchBox extends Component {
   static propTypes = {
     onSearchChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
   };
   constructor(props) {
     super(props);
@@ -16,8 +19,8 @@ class SearchBox extends Component {
         <input
           onChange={onSearchChange}
           type="search"
-          placeholder="Search..."
-          className="search-box w-full p-3 pl-10 pr-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+          placeholder={this.props.placeholder}
+          className={`${this.props.className} search-box max-w-full p-3 pl-12 pr-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors`}
         />
         <div className="bg-gray-400 h-full w-0.5 absolute top-0 left-9"></div>
         <button
