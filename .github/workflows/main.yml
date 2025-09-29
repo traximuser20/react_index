@@ -1,0 +1,48 @@
+name: Celebrate Commit Milestones 🎉
+
+on:
+  push:
+    branches:
+      - main  # change if your default branch is different
+
+jobs:
+  celebrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Count commits
+        id: commit_count
+        run: |
+          COUNT=$(git rev-list --count HEAD)
+          echo "COMMITS=$COUNT" >> $GITHUB_ENV
+          echo "Total commits: $COUNT"
+
+      - name: Check if milestone
+        id: milestone
+        run: |
+          # milestone every 500 commits (1000, 1500, 2000, ...)
+          if [ $(( $COMMITS % 10 )) -eq 0 ]; then
+            echo "MILESTONE_REACHED=true" >> $GITHUB_ENV
+          else
+            echo "MILESTONE_REACHED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Celebrate with fireworks 🎆
+        if: env.MILESTONE_REACHED == 'true'
+        run: |
+          echo "🎉 Milestone reached at $COMMITS commits! Updating README..."
+          
+          # Insert fireworks + confetti GIF
+          sed -i 's|<!-- CELEBRATION_PLACEHOLDER -->|![Fireworks](https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif) ![Confetti](https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif)|' README.md
+
+      - name: Commit changes
+        if: env.MILESTONE_REACHED == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "🎆 Celebrating $COMMITS commits with fireworks & confetti!"
+          git push
